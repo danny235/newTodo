@@ -75,27 +75,40 @@ input {
     border-radius: 5px;
     margin-bottom: 10px;
     background: #4EB9CD;
-    transition: all 0.75s ease;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5 ease;
 
 }
 
-.todos > input[type="text"] {
+.todos > input {
     background: none;
     text-transform: capitalize;
     font-weight: 600;
     outline: none;
     color: #ffffff;
-    padding: 5px 1px;
+    min-width: 40%;
     width: 10px;
 }
 
+.fa-check, .fa-trash, .fa-pencil {
+    pointer-events: none;
+}
 
-.check, .trash {
+.check, .trash, .edit {
     background: none;
     outline: none;
     border: none;
     font-size: 20px;
 }
+
+.edit {
+    display: none;
+    
+}
+
 
 .check {
     color: #00891E;
@@ -106,44 +119,13 @@ input {
 }
 
 .done {
+    opacity: 0.5;
     background: #51DF70 !important;
 }
 
 .line {
     text-decoration: line-through;
 }
-
-
-
-/* li {
-    list-style: none;
-    padding: 10px 20px;
-    color: #ffffff;
-    text-transform: capitalize;
-    font-weight: 600;
-    border: 2px solid #025f70;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background: #4EB9CD;
-    transition: all 0.75s ease;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5 ease;
-}
-
-li:hover {
-    background: #76CFE0;
-}
-
-li > button {
-    font-weight: normal;
-    background: none;
-    border: none;
-    float: right;
-    color: #025f70;
-    font-weight: 800;
-} */
 
 
 

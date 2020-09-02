@@ -19,14 +19,19 @@ function createListElement() {
 
     // create input
     var newItem = document.createElement("input"); // creates an element "li"
-    newItem.disabled = true;
     newItem.type = "text"; //makes text from input field the li text
+    newItem.disabled = true;
     newItem.value = input.value;
 
     // create a check btn
     var checkBtn = document.createElement("button");
     checkBtn.classList.add("check");
     checkBtn.innerHTML = `<i class="fa fa-check"></i>`;
+
+    // create edit btn
+    var pencilBtn = document.createElement("button");
+    pencilBtn.classList.add("edit");
+    pencilBtn.innerHTML = `<i class="fa fa-pencil" aria-hidden="true"></i>`;
 
     // create trash btn
     var trashBtn = document.createElement("button");
@@ -43,9 +48,16 @@ function createListElement() {
 
     //START STRIKETHROUGH
     // because it's in the function, it only adds it for new items
-    function crossOut() {
-        todos.classList.toggle("done");
-        newItem.classList.toggle("line");
+    function crossOut(e) {
+        e.stopPropagation();
+        const done = todos.classList.toggle("done");
+        const line = newItem.classList.toggle("line");
+
+        if(done&&line) {
+            todos.removeEventListener("click", editTodoItem);
+        } else {
+            todos.addEventListener("click", editTodoItem);
+        }
     }
 
     checkBtn.addEventListener("click", crossOut);
@@ -57,24 +69,23 @@ function createListElement() {
     // END ADD DELETE BUTTON
 
     // EDIT TODO
-    // todos.addEventListener("click", editTodoItem);
+    todos.addEventListener("click", editTodoItem);
 
-   
-    // function editTodoItem() {
-    //     todos.focus();
-    //     newItem.disabled = false;
-    //     checkBtn.style.display = "inline-block";
-        
-    // }
+    function editTodoItem(e) {
+        todos.insertBefore(pencilBtn, checkBtn);
+        pencilBtn.style.display = "inline-block";
+        newItem.classList.add('active');
+        newItem.disabled = !true;
+        newItem.focus();
 
-    // checkBtn.addEventListener('click', function() {
-    //     newItem.disabled = true;
-    //     todos.removeChild(checkBtn);
-    // });
+        const item = e.target;
 
-   
-
-
+        if (item.classList[0] === "edit") {
+            pencilBtn.remove();
+            newItem.disabled = true;
+            newItem.classList.remove('active');
+        } 
+    }
 
     //DELETE TODO
     function deleteTodoItem() {
