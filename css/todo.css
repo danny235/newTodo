@@ -85,7 +85,8 @@ input {
     font-weight: 600;
     outline: none;
     color: #ffffff;
-    min-width: 10%;
+    padding: 5px 1px;
+    width: 10px;
 }
 
 
