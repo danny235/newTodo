@@ -76,6 +76,7 @@ input {
     margin-bottom: 10px;
     background: #4EB9CD;
     transition: all 0.75s ease;
+    min-width: 50%;
 }
 
 .todos > input[type="text"] {
