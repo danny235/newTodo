@@ -104,11 +104,10 @@ input {
     font-size: 20px;
 }
 
-.edit {
-    display: none;
-    
+.editing {
+    background: white !important;
+    color: #000 !important;
 }
-
 
 .check {
     color: #00891E;
@@ -125,6 +124,14 @@ input {
 
 .line {
     text-decoration: line-through;
+}
+
+.save {
+    padding-left: 5px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    color: #fff;
 }
 
 

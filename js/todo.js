@@ -38,7 +38,13 @@ function createListElement() {
     trashBtn.classList.add("trash");
     trashBtn.innerHTML = `<i class="fa fa-trash"></i>`;
 
+    // save btn
+    let save = document.createElement('span');
+    save.textContent = 'save!';
+    save.classList.add('save');
+    
     todos.appendChild(newItem);
+    todos.appendChild(pencilBtn);
     todos.appendChild(checkBtn);
     todos.appendChild(trashBtn);
 
@@ -54,9 +60,13 @@ function createListElement() {
         const line = newItem.classList.toggle("line");
 
         if(done&&line) {
-            todos.removeEventListener("click", editTodoItem);
+            pencilBtn.removeEventListener("click", editTodoItem);
+            newItem.classList.remove("editing");
+            newItem.disabled = true;
+            save.remove();
+            todos.insertBefore(pencilBtn, checkBtn);
         } else {
-            todos.addEventListener("click", editTodoItem);
+            pencilBtn.addEventListener("click", editTodoItem);
         }
     }
 
@@ -69,22 +79,24 @@ function createListElement() {
     // END ADD DELETE BUTTON
 
     // EDIT TODO
-    todos.addEventListener("click", editTodoItem);
+    pencilBtn.addEventListener("click", editTodoItem);
 
-    function editTodoItem(e) {
-        todos.insertBefore(pencilBtn, checkBtn);
-        pencilBtn.style.display = "inline-block";
-        newItem.classList.add('active');
-        newItem.disabled = !true;
+    function editTodoItem() {
+        
+        newItem.disabled = false;
+        newItem.classList.add("editing");
         newItem.focus();
+        pencilBtn.remove();
+        todos.insertBefore(save, checkBtn);
 
-        const item = e.target;
-
-        if (item.classList[0] === "edit") {
-            pencilBtn.remove();
+        //remove save & disable listener
+        save.addEventListener('click', () => {
+            console.log('i love you');
+            newItem.classList.remove("editing");
             newItem.disabled = true;
-            newItem.classList.remove('active');
-        } 
+            save.remove();
+            todos.insertBefore(pencilBtn, checkBtn);
+        });
     }
 
     //DELETE TODO
